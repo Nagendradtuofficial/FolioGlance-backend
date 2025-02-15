@@ -1,13 +1,16 @@
 package com.folioGlance.bff.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 
-public class UserDetailsEntity {
+public class CreateAccountRequest {
 
-  @JsonProperty(value = "email" , required = false)
+  @JsonProperty(value = "email" , required = true)
+  @NotBlank(message = "Email is required")
   String email ;
 
-  @JsonProperty(value = "password" , required = false)
+  @JsonProperty(value = "password" , required = true)
+  @NotBlank(message = "Password is required")
   String password;
 
   @JsonProperty(value = "uuid" , required = false)

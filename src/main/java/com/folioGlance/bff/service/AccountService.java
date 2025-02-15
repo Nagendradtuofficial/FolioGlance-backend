@@ -1,8 +1,8 @@
 package com.folioGlance.bff.service;
 
-import com.folioGlance.bff.entity.UserDetailsEntity;
+import com.folioGlance.bff.entity.CreateAccountRequest;
 
 public interface AccountService {
-  public String createAccount(UserDetailsEntity userDetailsEntity);
+  public String createAccount(CreateAccountRequest createAccountRequest);
 
 }
