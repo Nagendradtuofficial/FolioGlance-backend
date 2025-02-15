@@ -14,6 +14,6 @@ public class AccountServiceImpl implements AccountService {
   @Override
   public String createAccount(UserDetailsEntity userDetailsEntity) {
     // Url generation logic here and will pass the url into the mail Service.
-    return mailService.sendEmail(userDetailsEntity.getEmailId() , "Hi , This is a Test Email","Test Email 101");
+    return mailService.sendEmail(userDetailsEntity.getEmail() , "Hi , This is a Test Email","Test Email 101");
   }
 }
