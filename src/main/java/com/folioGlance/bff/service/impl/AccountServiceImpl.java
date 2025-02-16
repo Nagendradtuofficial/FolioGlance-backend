@@ -1,7 +1,8 @@
 package com.folioGlance.bff.service.impl;
 
-import com.folioGlance.bff.entity.CreateAccountRequest;
+import com.folioGlance.bff.entity.UserDetailsEntity;
 import com.folioGlance.bff.service.AccountService;
+import com.folioGlance.bff.service.KafkaService;
 import com.folioGlance.bff.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,14 @@ public class AccountServiceImpl implements AccountService {
   @Autowired
   MailService mailService;
 
+  @Autowired
+  KafkaService kafkaService;
+
   @Override
-  public String createAccount(CreateAccountRequest createAccountRequest) {
+  public String createAccount(UserDetailsEntity userDetailsEntity) {
     // Url generation logic here and will pass the url into the mail Service.
-    return mailService.sendEmail(createAccountRequest.getEmail() , "Hi , This is a Test Email","Test Email 101");
+      kafkaService.produce(userDetailsEntity);
+      return "OK";
+//    return mailService.sendEmail(userDetailsEntity.getEmailId() , "Hi , This is a Test Email","Test Email 101");
   }
 }
