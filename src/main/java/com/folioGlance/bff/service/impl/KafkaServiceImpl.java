@@ -2,8 +2,10 @@ package com.folioGlance.bff.service.impl;
 
 import com.folioGlance.bff.entity.UserDetailsEntity;
 import com.folioGlance.bff.service.KafkaService;
+import com.folioGlance.bff.service.RedisService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaServiceImpl implements KafkaService {
+
+  @Autowired
+  private RedisService redisService ;
 
   @Value("${kafka.topic.name}")
   private String topicName ;
@@ -32,6 +37,6 @@ public class KafkaServiceImpl implements KafkaService {
   public void consume(UserDetailsEntity userDetailsEntity) {
     // to make sure data is saved in both (Redis as well temp db).
     System.out.println("✅ Received User Email: " + userDetailsEntity.getEmailId());
+    redisService.save(userDetailsEntity);
   }
-
 }
