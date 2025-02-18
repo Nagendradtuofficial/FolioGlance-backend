@@ -1,6 +1,6 @@
 package com.folioGlance.bff.service.impl;
 
-import com.folioGlance.bff.entity.UserDetailsEntity;
+import com.folioGlance.bff.entity.CreateAccountRequest;
 import com.folioGlance.bff.service.KafkaService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.tomcat.util.json.JSONParser;
@@ -15,23 +15,23 @@ public class KafkaServiceImpl implements KafkaService {
   @Value("${kafka.topic.name}")
   private String topicName ;
 
-  private final KafkaTemplate<String , UserDetailsEntity> kafkaTemplate;
+  private final KafkaTemplate<String , CreateAccountRequest> kafkaTemplate;
 
-  public KafkaServiceImpl(KafkaTemplate<String , UserDetailsEntity> kafkaTemplate){
+  public KafkaServiceImpl(KafkaTemplate<String , CreateAccountRequest> kafkaTemplate){
     this.kafkaTemplate = kafkaTemplate;
   }
 
   @Override
-  public void produce(UserDetailsEntity userDetailsEntity){
-    kafkaTemplate.send(topicName , userDetailsEntity);
+  public void produce(CreateAccountRequest CreateAccountRequest){
+    kafkaTemplate.send(topicName , CreateAccountRequest);
     return;
   }
 
   @Override
   @KafkaListener(topics = "${kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
-  public void consume(UserDetailsEntity userDetailsEntity) {
+  public void consume(CreateAccountRequest createAccountRequest) {
     // to make sure data is saved in both (Redis as well temp db).
-    System.out.println("✅ Received User Email: " + userDetailsEntity.getEmailId());
+        System.out.println("✅ Received User Email: " + createAccountRequest.getEmail());
   }
 
 }
