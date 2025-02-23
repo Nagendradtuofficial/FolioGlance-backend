@@ -1,10 +1,9 @@
 package com.folioGlance.bff.service;
 
-import com.folioGlance.bff.entity.UserDetailsEntity;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import com.folioGlance.bff.dto.request.AccountRequest;
 
 public interface KafkaService {
-  public void produce(UserDetailsEntity userDetailsEntity);
+  public void produce(AccountRequest AccountRequest);
 
-  public void consume(UserDetailsEntity userDetailsEntity);
+  public void consume(AccountRequest AccountRequest);
 }

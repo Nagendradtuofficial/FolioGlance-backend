@@ -1,6 +1,6 @@
 package com.folioGlance.bff.service.impl;
 
-import com.folioGlance.bff.entity.UserDetailsEntity;
+import com.folioGlance.bff.dto.request.AccountRequest;
 import com.folioGlance.bff.service.AccountService;
 import com.folioGlance.bff.service.KafkaService;
 import com.folioGlance.bff.service.MailService;
@@ -16,9 +16,9 @@ public class AccountServiceImpl implements AccountService {
   KafkaService kafkaService;
 
   @Override
-  public String createAccount(UserDetailsEntity userDetailsEntity) {
+  public String createAccount(AccountRequest AccountRequest) {
     // Url generation logic here and will pass the url into the mail Service.
-      kafkaService.produce(userDetailsEntity);
+      kafkaService.produce(AccountRequest);
       return "OK";
 //    return mailService.sendEmail(userDetailsEntity.getEmailId() , "Hi , This is a Test Email","Test Email 101");
   }
