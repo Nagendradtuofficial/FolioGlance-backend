@@ -1,20 +1,17 @@
-package com.folioGlance.bff.entity;
+package com.folioGlance.bff.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 
-public class CreateAccountRequest {
+public class AccountRequest {
 
   @JsonProperty(value = "email" , required = true)
   @NotBlank(message = "Email is required")
-  String email ;
+  private String email ;
 
   @JsonProperty(value = "password" , required = true)
   @NotBlank(message = "Password is required")
-  String password;
-
-  @JsonProperty(value = "uuid" , required = false)
-  String uuid;
+  private String password;
 
   public String getEmail() {
     return email;
@@ -24,19 +21,11 @@ public class CreateAccountRequest {
     return password;
   }
 
-  public String getUuid() {
-    return uuid;
-  }
-
   public void setEmail(String email){
     this.email=email;
   }
 
   public void setPassword(String password){
     this.password=password;
-  }
-
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
   }
 }
